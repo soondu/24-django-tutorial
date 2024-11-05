@@ -34,11 +34,11 @@ class CalculatorAPIView(GenericAPIView):
 
         if operator == '+':
             result = num1+num2
-        elif serializer.operator == '-':
+        elif operator == '-':
             result = num1-num2
-        elif serializer.operator == '*':
+        elif operator == '*':
             result = num1*num2
-        elif serializer.operator == '/':
+        elif operator == '/':
             if num2==0:
                 return Response({"error": "Cannot divide by zero"})
             result = num1/num2
