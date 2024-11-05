@@ -22,6 +22,29 @@ class CalculatorAPIView(GenericAPIView):
 
         result: Decimal = None
         ## assignment1: 이곳에 과제를 작성해주세요
+        input_a=serializer.validated_data['input_a']
+        input_b=serializer.validated_data['input_b']
+        operator=serializer.validated_data['operator']
+
+        try:
+            num1=Decimal(input_a)
+            num2=Decimal(input_b)
+        except InvalidOperation:
+            return Response({"error": "Invalid number"})
+
+        if operator == '+':
+            result = num1+num2
+        elif serializer.operator == '-':
+            result = num1-num2
+        elif serializer.operator == '*':
+            result = num1*num2
+        elif serializer.operator == '/':
+            if num2==0:
+                return Response({"error": "Cannot divide by zero"})
+            result = num1/num2
+        else:
+            return Response({"error": "Invalid operator"})
+
         ## end assignment1
 
         # serialization
